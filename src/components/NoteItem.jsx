@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-
+import { showFormattedDate } from "../utils"
 export default function NoteItem({
   id,
   title,
@@ -13,12 +13,7 @@ export default function NoteItem({
           <a href={`/notes/${id}`}>{title}</a>
         </h4>
         <p className="note-item__createdAt">
-          {new Date(createdAt).toLocaleDateString("id-ID", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
+          {showFormattedDate(createdAt)}
         </p>
         <p className="note-item__body">{body}</p>
     </div>
@@ -26,6 +21,7 @@ export default function NoteItem({
 }
 
 NoteItem.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
