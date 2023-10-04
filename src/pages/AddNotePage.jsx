@@ -2,6 +2,7 @@ import React from 'react'
 import { FiCheck } from 'react-icons/fi'
 import { addNote } from '../utils/local-data'
 import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 function wrapper (Component) {
   const WrappedComponent = (props) => {
@@ -29,7 +30,7 @@ class AddNotePage extends React.Component {
     this.onChangeEventHandler = this.onChangeEventHandler.bind(this)
   }
 
-  render() {
+  render () {
     return (
       <form
         className='add-new-page__input'
@@ -61,23 +62,27 @@ class AddNotePage extends React.Component {
     )
   }
 
-  onChangeEventHandler(event){
+  onChangeEventHandler (event) {
     const { id, value, innerHTML, type } = event.target
     this.setState(previousState => {
       return {
         ...previousState,
-        [id]: type == 'text' ? value : innerHTML
+        [id]: type === 'text' ? value : innerHTML
       }
     })
   }
 
-  onCreateNotesHandler() {
+  onCreateNotesHandler () {
     addNote({
       title: this.state.title,
       body: this.state.body
     })
     this.navigate('/')
   }
+}
+
+AddNotePage.propTypes = {
+  navigate: PropTypes.func.isRequired
 }
 
 export default wrapper(AddNotePage)

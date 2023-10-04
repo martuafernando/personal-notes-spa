@@ -5,6 +5,7 @@ import Header from './components/Header'
 import ArchivePage from './pages/ArchivePage'
 import DetailPage from './pages/DetailPage'
 import AddNotePage from './pages/AddNotePage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App () {
   return (
@@ -16,6 +17,7 @@ function App () {
         <Route path="/notes/new" element={<AddNotePage />} />
         <Route path="/archives" element={<ArchivePage />} />
         <Route path="/notes/:noteId" element={<DetailPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </main>
     </>

@@ -1,7 +1,6 @@
 import React from 'react'
 import NoteList from '../components/NoteList'
 import { getActiveNotes } from '../utils/local-data'
-import AddNoteButton from '../components/button/addNoteButton'
 import SearchBar from '../components/SearchBar'
 import { Link } from 'react-router-dom'
 import { FiPlus } from 'react-icons/fi'
