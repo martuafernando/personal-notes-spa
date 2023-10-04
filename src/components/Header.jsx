@@ -1,7 +1,7 @@
 import React from 'react'
 import Navigation from './Navigation'
 import { Link } from 'react-router-dom'
-
+import PropTypes from 'prop-types'
 export default function Header ({ title }) {
   return (
     <header>
@@ -11,4 +11,8 @@ export default function Header ({ title }) {
       <Navigation />
     </header>
   )
+}
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired
 }

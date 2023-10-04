@@ -16,5 +16,6 @@ export default function DeleteNoteButton ({ id, onDelete }) {
 }
 
 DeleteNoteButton.propTypes = {
+  id: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired
 }

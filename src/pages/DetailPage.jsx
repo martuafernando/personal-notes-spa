@@ -5,9 +5,19 @@ import DeleteNoteButton from '../components/button/DeleteNoteButton'
 import ArchiveNoteButton from '../components/button/ArchiveNoteButton'
 import { showFormattedDate } from '../utils'
 import UnarchiveNoteButton from '../components/button/UnarchiveNoteButton'
+import PropTypes from 'prop-types'
 
 function wrapper (Component) {
-  return props => <Component {...props} params={useParams()} navigate = {useNavigate()} />
+  const WrappedComponent = (props) => {
+    const params = useParams()
+    const navigate = useNavigate()
+
+    return <Component {...props} params={params} navigate={navigate} />
+  }
+
+  WrappedComponent.displayName = `Wrapped(${Component.displayName || Component.name || 'Component'})`
+
+  return WrappedComponent
 }
 
 class DetailPage extends React.Component {
@@ -78,6 +88,11 @@ class DetailPage extends React.Component {
       }
     })
   }
+}
+
+DetailPage.propTypes = {
+  navigate: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired
 }
 
 export default wrapper(DetailPage)
