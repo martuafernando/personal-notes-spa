@@ -1,8 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
-import NoteItem from "./NoteItem"
+import React from 'react'
+import PropTypes from 'prop-types'
+import NoteItem from './NoteItem'
 
-export default function NoteList({ notes }) {
+export default function NoteList ({ notes }) {
   return (
     <>
       <div className="notes-list">
@@ -27,5 +27,5 @@ export default function NoteList({ notes }) {
 }
 
 NoteList.propTypes = {
-  notes: PropTypes.arrayOf(NoteItem),
+  notes: PropTypes.arrayOf(NoteItem)
 }

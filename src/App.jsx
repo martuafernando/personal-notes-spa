@@ -1,8 +1,9 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom';
-import HomePage from './pages/homepage';
-import Header from './components/Header';
-import ArchivePage from './pages/ArchivePage';
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/homepage'
+import Header from './components/Header'
+import ArchivePage from './pages/ArchivePage'
+import DetailPage from './pages/DetailPage'
 
 function App () {
   return (
@@ -12,7 +13,7 @@ function App () {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/archives" element={<ArchivePage />} />
-        <Route path="/notes" element={<ArchivePage />} />
+        <Route path="/notes/:noteId" element={<DetailPage />} />
       </Routes>
     </main>
     </>

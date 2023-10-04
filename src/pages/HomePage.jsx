@@ -1,11 +1,11 @@
-import React from "react"
-import NoteList from "../components/NoteList"
-import { getActiveNotes } from "../utils/local-data"
-import AddNoteButton from "../components/button/addNoteButton"
-import SearchBar from "../components/SearchBar"
+import React from 'react'
+import NoteList from '../components/NoteList'
+import { getActiveNotes } from '../utils/local-data'
+import AddNoteButton from '../components/button/addNoteButton'
+import SearchBar from '../components/SearchBar'
 
-export default class HomePage extends React.Component{
-  constructor(props){
+export default class HomePage extends React.Component {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -16,7 +16,7 @@ export default class HomePage extends React.Component{
     this.onSearchNotesHandler = this.onSearchNotesHandler.bind(this)
   }
 
-  render() {
+  render () {
     return (
       <>
         <h2>Catatan Aktif</h2>
@@ -27,7 +27,7 @@ export default class HomePage extends React.Component{
         <NoteList
           notes={
             this.state.notes
-              .filter((it)=> it.title
+              .filter((it) => it.title
                 .toLowerCase()
                 .includes(this.state.keyword.toLowerCase()))
           }
@@ -39,8 +39,7 @@ export default class HomePage extends React.Component{
     )
   }
 
-  onSearchNotesHandler(keyword) {
-    console.log('testing::')
+  onSearchNotesHandler (keyword) {
     this.setState(previousState => {
       return {
         ...previousState,

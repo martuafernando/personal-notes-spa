@@ -1,16 +1,17 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { showFormattedDate } from "../utils"
-export default function NoteItem({
+import React from 'react'
+import PropTypes from 'prop-types'
+import { showFormattedDate } from '../utils'
+import { Link } from 'react-router-dom'
+export default function NoteItem ({
   id,
   title,
   body,
-  createdAt,
+  createdAt
 }) {
   return (
     <div className="note-item">
         <h4 className="note-item__title">
-          <a href={`/notes/${id}`}>{title}</a>
+          <Link to={`/notes/${id}`}>{title}</Link>
         </h4>
         <p className="note-item__createdAt">
           {showFormattedDate(createdAt)}
@@ -24,5 +25,5 @@ NoteItem.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired
 }

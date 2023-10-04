@@ -1,11 +1,12 @@
-import React from "react"
-import Navigation from "./Navigation"
+import React from 'react'
+import Navigation from './Navigation'
+import { Link } from 'react-router-dom'
 
-export default function Header({ title }) {
+export default function Header ({ title }) {
   return (
     <header>
       <h1>
-        <a href="/">{ title }</a>
+        <Link to="/">{ title }</Link>
       </h1>
       <Navigation />
     </header>

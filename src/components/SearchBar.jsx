@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function SearchBar({onSearch, placeholder}){
+export default function SearchBar ({ onSearch, placeholder }) {
   return (
     <form className="search-bar">
       <input
@@ -14,5 +14,5 @@ export default function SearchBar({onSearch, placeholder}){
 
 SearchBar.propTypes = {
   placeholder: PropTypes.string,
-  onSearch: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired
 }

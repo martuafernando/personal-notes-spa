@@ -1,11 +1,10 @@
-import React from "react"
-import NoteList from "../components/NoteList"
-import { getArchivedNotes } from "../utils/local-data"
-import AddNoteButton from "../components/button/addNoteButton"
-import SearchBar from "../components/SearchBar"
+import React from 'react'
+import NoteList from '../components/NoteList'
+import { getArchivedNotes } from '../utils/local-data'
+import SearchBar from '../components/SearchBar'
 
-export default class ArchivePage extends React.Component{
-  constructor(props){
+export default class ArchivePage extends React.Component {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -16,7 +15,7 @@ export default class ArchivePage extends React.Component{
     this.onSearchNotesHandler = this.onSearchNotesHandler.bind(this)
   }
 
-  render() {
+  render () {
     return (
       <>
         <h2>Catatan Arsip</h2>
@@ -27,7 +26,7 @@ export default class ArchivePage extends React.Component{
         <NoteList
           notes={
             this.state.notes
-              .filter((it)=> it.title
+              .filter((it) => it.title
                 .toLowerCase()
                 .includes(this.state.keyword.toLowerCase()))
           }
@@ -36,7 +35,7 @@ export default class ArchivePage extends React.Component{
     )
   }
 
-  onSearchNotesHandler(keyword) {
+  onSearchNotesHandler (keyword) {
     this.setState(previousState => {
       return {
         ...previousState,

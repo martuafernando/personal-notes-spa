@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import { FiPlus } from 'react-icons/fi'
 import PropTypes from 'prop-types'
 
-export default function AddNoteButton({onClick}){
+export default function AddNoteButton ({ onClick }) {
   return (
     <button
       type="button"
@@ -16,5 +16,5 @@ export default function AddNoteButton({onClick}){
 }
 
 AddNoteButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 }
