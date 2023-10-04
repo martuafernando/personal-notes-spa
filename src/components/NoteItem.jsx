@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { showFormattedDate } from '../utils'
 import { Link } from 'react-router-dom'
+import parser from 'html-react-parser'
 export default function NoteItem ({
   id,
   title,
@@ -16,7 +17,7 @@ export default function NoteItem ({
         <p className="note-item__createdAt">
           {showFormattedDate(createdAt)}
         </p>
-        <p className="note-item__body">{body}</p>
+        <p className="note-item__body">{parser(body)}</p>
     </div>
   )
 }

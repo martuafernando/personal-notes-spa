@@ -4,6 +4,7 @@ import HomePage from './pages/homepage'
 import Header from './components/Header'
 import ArchivePage from './pages/ArchivePage'
 import DetailPage from './pages/DetailPage'
+import AddNotePage from './pages/AddNotePage'
 
 function App () {
   return (
@@ -12,6 +13,7 @@ function App () {
     <main>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/notes/new" element={<AddNotePage />} />
         <Route path="/archives" element={<ArchivePage />} />
         <Route path="/notes/:noteId" element={<DetailPage />} />
       </Routes>

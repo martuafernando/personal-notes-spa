@@ -3,6 +3,8 @@ import NoteList from '../components/NoteList'
 import { getActiveNotes } from '../utils/local-data'
 import AddNoteButton from '../components/button/addNoteButton'
 import SearchBar from '../components/SearchBar'
+import { Link } from 'react-router-dom'
+import { FiPlus } from 'react-icons/fi'
 
 export default class HomePage extends React.Component {
   constructor (props) {
@@ -33,7 +35,12 @@ export default class HomePage extends React.Component {
           }
         />
         <div className="homepage__action">
-          <AddNoteButton onClick={() => console.log('testing::')}/>
+          <Link
+            className="action"
+            title='Tambah'
+            to='/notes/new'>
+            <FiPlus/>
+          </Link>
         </div>
       </>
     )

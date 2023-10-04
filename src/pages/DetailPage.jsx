@@ -6,6 +6,7 @@ import ArchiveNoteButton from '../components/button/ArchiveNoteButton'
 import { showFormattedDate } from '../utils'
 import UnarchiveNoteButton from '../components/button/UnarchiveNoteButton'
 import PropTypes from 'prop-types'
+import parser from 'html-react-parser'
 
 function wrapper (Component) {
   const WrappedComponent = (props) => {
@@ -42,7 +43,7 @@ class DetailPage extends React.Component {
         <div className="detail-page">
           <h2 className="detail-page__title">{this.state.note.title}</h2>
           <p className="detail-page__createdAt">{showFormattedDate(this.state.note.createdAt)}</p>
-          <p className="detail-page__body">{this.state.note.body}</p>
+          <div className="detail-page__body">{parser(this.state.note.body)}</div>
         </div>
         <div className="homepage__action">
           {this.state.note.archived
