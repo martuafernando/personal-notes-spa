@@ -92,7 +92,7 @@ class DetailPage extends React.Component {
 }
 
 DetailPage.propTypes = {
-  navigate: PropTypes.object.isRequired,
+  navigate: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired
 }
 

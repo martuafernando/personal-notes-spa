@@ -9,18 +9,18 @@ import NotFoundPage from './pages/NotFoundPage'
 
 function App () {
   return (
-    <>
-    <Header title='Aplikasi Catatan' />
-    <main>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/notes/new" element={<AddNotePage />} />
-        <Route path="/archives" element={<ArchivePage />} />
-        <Route path="/notes/:noteId" element={<DetailPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </main>
-    </>
+    <div className='app-container'>
+      <Header title='Aplikasi Catatan' />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/notes/new" element={<AddNotePage />} />
+          <Route path="/archives" element={<ArchivePage />} />
+          <Route path="/notes/:noteId" element={<DetailPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </div>
   )
 }
 
