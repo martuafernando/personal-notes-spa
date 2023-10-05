@@ -17,7 +17,7 @@ export default function NoteItem ({
         <p className="note-item__createdAt">
           {showFormattedDate(createdAt)}
         </p>
-        <p className="note-item__body">{parser(body)}</p>
+        <div className="note-item__body">{parser(body)}</div>
     </div>
   )
 }
