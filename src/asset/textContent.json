@@ -1,0 +1,24 @@
+{
+  "id": {
+    "title": "Aplikasi Catatan",
+    
+    "login-instruction" : "Yuk, login untuk menggunakan aplikasi.",
+    "sign-up-question" : "Belum punya akun?",
+    "sign-up-button-inline" : "Daftar di sini",
+    
+    "sign-up-instruction" : "Isi form untuk mendaftar akun.",
+    "login-question" : "Sudah punya akun?",
+    "login-button-inline" : "Login di sini"
+  },
+  "en": {
+    "title": "Notes App",
+
+    "login-instruction" : "Login to use app, please.",
+    "sign-up-question" : "Don't have an account?",
+    "sign-up-button-inline" : "Register here",
+
+    "sign-up-instruction" : "Fill the form to register account.",
+    "login-question" : "Already have an account?",
+    "login-button-inline" : "Login here"
+  }
+}

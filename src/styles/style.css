@@ -109,7 +109,9 @@ main {
   -webkit-box-orient: vertical;
 }
 
-.detail-page {
+.detail-page,
+.login-page,
+.register-page {
   margin: 0 auto;
   margin-top: 32px; 
   width: 90%;
