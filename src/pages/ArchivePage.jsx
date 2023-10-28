@@ -1,46 +1,40 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NoteList from '../components/NoteList'
-import { getArchivedNotes } from '../utils/local-data'
+import { getArchivedNotes } from '../utils/network-data'
 import SearchBar from '../components/SearchBar'
+import useInput from '../hooks/useInput'
+import * as textContent from '../asset/textContent.json'
+import { LanguageContext } from '../contexts/LanguageContext'
 
-export default class ArchivePage extends React.Component {
-  constructor (props) {
-    super(props)
+export default function ArchivePage() {
+  const [keyword, onKeywordChangedHandler] = useInput('')
+  const [ notes, setNotes ] = useState()
+  const { language } = useContext(LanguageContext)
 
-    this.state = {
-      notes: getArchivedNotes(),
-      keyword: ''
-    }
+  useEffect(() => {
+    (async () => {
+      const { error, data } = await getArchivedNotes()
+      if (!error) setNotes(data)
+    })()
+  }, [])
 
-    this.onSearchNotesHandler = this.onSearchNotesHandler.bind(this)
-  }
-
-  render () {
-    return (
-      <>
-        <h2>Catatan Arsip</h2>
-        <SearchBar
-          placeholder='Cari berdasarkan judul ...'
-          onSearch={this.onSearchNotesHandler}
-        />
-        <NoteList
-          notes={
-            this.state.notes
-              .filter((it) => it.title
-                .toLowerCase()
-                .includes(this.state.keyword.toLowerCase()))
-          }
-        />
-      </>
-    )
-  }
-
-  onSearchNotesHandler (keyword) {
-    this.setState(previousState => {
-      return {
-        ...previousState,
-        keyword
-      }
-    })
-  }
+  return (
+    <>
+      <h2>Catatan Arsip</h2>
+      <SearchBar
+        placeholder={textContent[language]['searchbar-placeholder']}
+        onSearch={onKeywordChangedHandler}
+      />
+      <NoteList
+        notes={
+          notes && (
+            notes
+            .filter((it) => it.title
+              .toLowerCase()
+              .includes(keyword.toLowerCase()))
+          )
+        }
+      />
+    </>
+  )
 }

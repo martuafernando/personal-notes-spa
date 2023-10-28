@@ -3,13 +3,14 @@ import PropTypes, { objectOf } from 'prop-types'
 import NoteItem from './NoteItem'
 
 export default function NoteList ({ notes }) {
+  if (!notes) notes = [{}, {}, {}]
   return (
     <>
       <div className="notes-list">
         {
-          notes.map((note) => (
+          notes.map((note, index) => (
             <NoteItem
-              key={note.id}
+              key={index}
               {...note}
             />
           ))
@@ -27,5 +28,5 @@ export default function NoteList ({ notes }) {
 }
 
 NoteList.propTypes = {
-  notes: PropTypes.arrayOf(objectOf(NoteItem)).isRequired
+  notes: PropTypes.arrayOf(objectOf(NoteItem))
 }

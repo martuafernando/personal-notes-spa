@@ -1,24 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import useInput from '../hooks/useInput'
 import { Link, useNavigate } from 'react-router-dom'
 import { login, putAccessToken } from '../utils/network-data'
 import * as textContent from '../asset/textContent.json'
 import { LanguageContext } from '../contexts/LanguageContext'
+import LoadingPage from './LoadingPage'
 
 function LoginPage() {
   const [email, onEmailChangeHandler] = useInput('')
   const [password, onPasswordChangeHandler] = useInput('')
   const navigate = useNavigate()
   const { language } = useContext(LanguageContext)
+  const [loading, setLoading] = useState(false)
 
   async function onsubmitHandler(e) {
     e.preventDefault()
+    setLoading(true)
     const {error, data} = await login({ email, password })
-    putAccessToken(data.accessToken)
-    navigate('/')
+    if (!error) {
+      putAccessToken(data.accessToken)
+      navigate(0)
+    }
+    setLoading(false)
   }
 
-  return (
+  return loading
+  ? (<LoadingPage />)
+  : (
     <>
       <section className="login-page" onSubmit={onsubmitHandler}>
         <h2>{textContent[language]["login-instruction"]}</h2>

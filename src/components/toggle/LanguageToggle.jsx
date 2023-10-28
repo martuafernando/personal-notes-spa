@@ -6,7 +6,7 @@ function LanguageToggle() {
   const { onLanguageToggled } = useContext(LanguageContext)
   return (
     <button
-      className='toggle-theme'
+      className='toggle-locale'
       onClick={onLanguageToggled}
     > <FaLanguage />
     </button>

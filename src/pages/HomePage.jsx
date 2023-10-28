@@ -1,56 +1,50 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NoteList from '../components/NoteList'
-import { getActiveNotes } from '../utils/local-data'
+import { getActiveNotes } from '../utils/network-data'
 import SearchBar from '../components/SearchBar'
 import { Link } from 'react-router-dom'
 import { FiPlus } from 'react-icons/fi'
+import * as textContent from '../asset/textContent.json'
+import useInput from '../hooks/useInput'
+import { LanguageContext } from '../contexts/LanguageContext'
 
-export default class HomePage extends React.Component {
-  constructor (props) {
-    super(props)
+export default function HomePage() {
+  const [ notes, setNotes ] = useState()
+  const [ keyword, onKeywordChangedHandler ] = useInput('')
+  const { language } = useContext(LanguageContext)
 
-    this.state = {
-      notes: getActiveNotes(),
-      keyword: ''
-    }
+  useEffect(() => {
+    (async () => {
+      const { error, data } = await getActiveNotes()
+      if (!error) setNotes(data)
+    })()
+  }, [])
 
-    this.onSearchNotesHandler = this.onSearchNotesHandler.bind(this)
-  }
-
-  render () {
-    return (
-      <>
-        <h2>Catatan Aktif</h2>
-        <SearchBar
-          placeholder='Cari berdasarkan judul ...'
-          onSearch={this.onSearchNotesHandler}
-        />
-        <NoteList
-          notes={
-            this.state.notes
-              .filter((it) => it.title
-                .toLowerCase()
-                .includes(this.state.keyword.toLowerCase()))
-          }
-        />
-        <div className="homepage__action">
-          <Link
-            className="action"
-            title='Tambah'
-            to='/notes/new'>
-            <FiPlus/>
-          </Link>
-        </div>
-      </>
-    )
-  }
-
-  onSearchNotesHandler (keyword) {
-    this.setState(previousState => {
-      return {
-        ...previousState,
-        keyword
-      }
-    })
-  }
+  return (
+    <>
+      <h2>{textContent[language]['active-notes-page-title']}</h2>
+      <SearchBar
+        placeholder={textContent[language]['searchbar-placeholder']}
+        onSearch={onKeywordChangedHandler}
+      />
+      <NoteList
+        notes={
+          notes && (
+            notes
+            .filter((it) => it.title
+              .toLowerCase()
+              .includes(keyword.toLowerCase()))
+          )
+        }
+      />
+      <div className="homepage__action">
+        <Link
+          className="action"
+          title='Tambah'
+          to='/notes/new'>
+          <FiPlus/>
+        </Link>
+      </div>
+    </>
+  )
 }

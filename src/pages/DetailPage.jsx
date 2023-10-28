@@ -1,99 +1,63 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { archiveNote, deleteNote, getNote, unarchiveNote } from '../utils/local-data'
+import { archiveNote, deleteNote, getNote, unarchiveNote } from '../utils/network-data'
 import DeleteNoteButton from '../components/button/DeleteNoteButton'
 import ArchiveNoteButton from '../components/button/ArchiveNoteButton'
 import { showFormattedDate } from '../utils'
 import UnarchiveNoteButton from '../components/button/UnarchiveNoteButton'
-import PropTypes from 'prop-types'
+
 import parser from 'html-react-parser'
 
-function wrapper (Component) {
-  const WrappedComponent = (props) => {
-    const params = useParams()
-    const navigate = useNavigate()
+export default function DetailPage() {
+  const params = useParams()
+  const navigate = useNavigate()
+  const [note, setNote] = useState()
 
-    return <Component {...props} params={params} navigate={navigate} />
-  }
+  useEffect(() => {
+    (async () => {
+      const { error, data } = await getNote(params.noteId)
+      if (!error) setNote(data)
+    })()
+  }, [])
 
-  WrappedComponent.displayName = `Wrapped(${Component.displayName || Component.name || 'Component'})`
-
-  return WrappedComponent
-}
-
-class DetailPage extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.navigate = props.navigate
-
-    this.state = {
-      note: getNote(props.params.noteId)
-    }
-
-    this.onSearchNotesHandler = this.onSearchNotesHandler.bind(this)
-    this.onArchiveNoteHandler = this.onArchiveNoteHandler.bind(this)
-    this.onUnarchiveNoteHandler = this.onUnarchiveNoteHandler.bind(this)
-    this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this)
-  }
-
-  render () {
-    return (
-      <>
-        <div className="detail-page">
-          <h2 className="detail-page__title">{this.state.note.title}</h2>
-          <p className="detail-page__createdAt">{showFormattedDate(this.state.note.createdAt)}</p>
-          <div className="detail-page__body">{parser(this.state.note.body)}</div>
-        </div>
-        <div className="homepage__action">
-          {this.state.note.archived
-            ? <UnarchiveNoteButton
-              id={this.props.params.noteId}
-              onUnarchive={this.onUnarchiveNoteHandler}
-            />
-            : <ArchiveNoteButton
-              id={this.props.params.noteId}
-              onArchive={this.onArchiveNoteHandler}
-            />
-          }
-          <DeleteNoteButton
-            id={this.props.params.noteId}
-            onDelete={this.onDeleteNoteHandler}
-          />
-        </div>
-      </>
-    )
-  }
-
-  onArchiveNoteHandler (noteId) {
-    unarchiveNote(noteId)
+  function onArchiveNoteHandler (noteId) {
     archiveNote(noteId)
-    this.navigate('/')
+    navigate('/')
   }
 
-  onUnarchiveNoteHandler (noteId) {
+  function onUnarchiveNoteHandler (noteId) {
     unarchiveNote(noteId)
-    this.navigate('/')
+    navigate('/')
   }
 
-  onDeleteNoteHandler (noteId) {
+  function onDeleteNoteHandler (noteId) {
     deleteNote(noteId)
-    this.navigate('/')
+    navigate('/')
   }
 
-  onSearchNotesHandler (keyword) {
-    this.setState(previousState => {
-      return {
-        ...previousState,
-        keyword
-      }
-    })
-  }
+  return (
+    <>
+      <div className="detail-page">
+        <h2 className={"detail-page__title " + (note?.title === undefined ? "skeleton-text" : '')}>{note?.title}</h2>
+        <p className={"detail-page__createdAt " + (note?.createdAt === undefined ? "skeleton-text" : '')} >{ note?.createdAt && showFormattedDate(note?.createdAt) }</p>
+        <div className={"detail-page__body " + (note?.body === undefined ? "skeleton-text" : '')}>{ note?.body && parser(note?.body) }</div>
+      </div>
+      <div className="homepage__action">
+        {note?.archived
+          ? <UnarchiveNoteButton
+            id={params.noteId}
+            onUnarchive={onUnarchiveNoteHandler}
+          />
+          : <ArchiveNoteButton
+            id={params.noteId}
+            onArchive={onArchiveNoteHandler}
+          />
+        }
+        <DeleteNoteButton
+          id={params.noteId}
+          onDelete={onDeleteNoteHandler}
+        />
+      </div>
+    </>
+  )
 }
-
-DetailPage.propTypes = {
-  navigate: PropTypes.func.isRequired,
-  params: PropTypes.object.isRequired
-}
-
-export default wrapper(DetailPage)

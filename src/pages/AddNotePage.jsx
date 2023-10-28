@@ -1,88 +1,49 @@
 import React from 'react'
 import { FiCheck } from 'react-icons/fi'
-import { addNote } from '../utils/local-data'
+import { addNote } from '../utils/network-data'
 import { useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import useInput from '../hooks/useInput'
 
-function wrapper (Component) {
-  const WrappedComponent = (props) => {
-    const navigate = useNavigate()
+export default function AddNotePage () {
+  const [title, onTitleChanged] = useInput('')
+  const [body, onBodyChanged] = useInput('')
+  const navigate = useNavigate()
 
-    return <Component navigate={navigate} />
+  function onCreateNotesHandler (event) {
+    event.preventDefault()
+    console.log('testing::', title, body)
+    addNote({ title, body })
+    navigate('/')
   }
 
-  WrappedComponent.displayName = `Wrapped(${Component.displayName || Component.name || 'Component'})`
-
-  return WrappedComponent
-}
-
-class AddNotePage extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.navigate = props.navigate
-    this.state = {
-      title: '',
-      body: ''
-    }
-
-    this.onCreateNotesHandler = this.onCreateNotesHandler.bind(this)
-    this.onChangeEventHandler = this.onChangeEventHandler.bind(this)
-  }
-
-  render () {
-    return (
-      <form
-        className='add-new-page__input'
-        onSubmit={this.onCreateNotesHandler}>
-        <input
-          className='add-new-page__input__title'
-          placeholder='Catatan Rahasia'
-          type="text"
-          name="title"
-          id="title"
-          onChange={this.onChangeEventHandler}
-        />
-        <div
-          className='add-new-page__input__body'
-          name='body'
-          id="body"
-          data-placeholder='Sebenarnya adalah ...'
-          onInput={this.onChangeEventHandler}
-          contentEditable>
-          </div>
-        <div className="add-new-page__action">
-          <button
-            className='action'
-            type="submit">
-            <FiCheck/>
-          </button>
+  return (
+    <form
+      className='add-new-page__input'
+      onSubmit={onCreateNotesHandler}>
+      <input
+        required
+        className='add-new-page__input__title'
+        placeholder='Catatan Rahasia'
+        type="text"
+        name="title"
+        id="title"
+        onChange={onTitleChanged}
+      />
+      <div
+        className='add-new-page__input__body'
+        name='body'
+        id="body"
+        data-placeholder='Sebenarnya adalah ...'
+        onInput={onBodyChanged}
+        contentEditable>
         </div>
-      </form>
-    )
-  }
-
-  onChangeEventHandler (event) {
-    const { id, value, innerHTML, type } = event.target
-    this.setState(previousState => {
-      return {
-        ...previousState,
-        [id]: type === 'text' ? value : innerHTML
-      }
-    })
-  }
-
-  onCreateNotesHandler () {
-    addNote({
-      title: this.state.title,
-      body: this.state.body
-    })
-    this.navigate('/')
-  }
+      <div className="add-new-page__action">
+        <button
+          className='action'
+          type="submit">
+          <FiCheck/>
+        </button>
+      </div>
+    </form>
+  )
 }
-
-AddNotePage.propTypes = {
-  navigate: PropTypes.func.isRequired
-}
-
-export default wrapper(AddNotePage)

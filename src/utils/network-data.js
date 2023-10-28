@@ -5,11 +5,19 @@ function getAccessToken() {
 }
 
 function isUserLogged() {
-  return localStorage.getItem('accessToken') ? true : false
+  return !!localStorage.getItem('accessToken')
 }
 
 function putAccessToken(accessToken) {
   return localStorage.setItem('accessToken', accessToken)
+}
+
+function putLanguage(language) {
+  return localStorage.setItem('language', language)
+}
+
+function getLanguage() {
+  return localStorage.getItem('language')
 }
 
 async function fetchWithToken(url, options = {}) {
@@ -39,6 +47,10 @@ async function login({ email, password }) {
   }
 
   return { error: false, data: responseJson.data }
+}
+
+function logout() {
+  return localStorage.clear()
 }
 
 async function register({ name, email, password }) {
@@ -169,6 +181,7 @@ export {
   isUserLogged,
   putAccessToken,
   login,
+  logout,
   register,
   getUserLogged,
   addNote,
@@ -178,4 +191,6 @@ export {
   archiveNote,
   unarchiveNote,
   deleteNote,
+  getLanguage,
+  putLanguage
 }
