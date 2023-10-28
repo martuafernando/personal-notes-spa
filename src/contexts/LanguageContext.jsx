@@ -25,5 +25,5 @@ export function LanguageProvider ({ children }) {
 }
 
 LanguageProvider.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.node
 }

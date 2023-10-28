@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
-import { putTheme } from '../utils/network-data'
+import { getTheme, putTheme } from '../utils/network-data'
 import PropTypes from 'prop-types'
 
 export const ThemeContext = React.createContext('dark')
 
 export function ThemeProvider ({ children }) {
-  const [theme, setTheme] = React.useState('light')
+  const [theme, setTheme] = React.useState(getTheme)
 
   function onThemeToggled () {
     setTheme((prevTheme) => {
@@ -25,5 +25,5 @@ export function ThemeProvider ({ children }) {
 }
 
 ThemeProvider.propTypes = {
-  children: PropTypes.any
+  children: PropTypes.node
 }
