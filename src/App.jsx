@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import HomePage from './pages/homepage'
+import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import Header from './components/Header'
 import ArchivePage from './pages/ArchivePage'
@@ -10,11 +10,11 @@ import RegisterPage from './pages/RegisterPage'
 import { getUserLogged, isUserLogged } from './utils/network-data'
 import { LanguageContext } from './contexts/LanguageContext'
 import * as textContent from './asset/textContent.json'
-import { Suspense, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from './contexts/ThemeContext'
 
 function App () {
-  const [ isAuthenticated, setAuthenticated ] = useState(isUserLogged)
+  const [isAuthenticated, setAuthenticated] = useState(isUserLogged)
   const { language } = useContext(LanguageContext)
   const { theme } = useContext(ThemeContext)
   const [userData, setUserData] = useState({
@@ -34,7 +34,7 @@ function App () {
       })()
     }
   }, [isAuthenticated])
-  
+
   return (
     <div className='app-container'>
       <Header
@@ -43,7 +43,8 @@ function App () {
       />
       <main>
         <Routes>
-          {isAuthenticated ? (
+          {isAuthenticated
+            ? (
             <>
               <Route path="/" element={<HomePage />} />
               <Route path="/notes/new" element={<AddNotePage />} />
@@ -51,12 +52,13 @@ function App () {
               <Route path="/notes/:noteId" element={<DetailPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </>
-          ) : (
+              )
+            : (
             <>
               <Route path="/*" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
             </>
-          )}
+              )}
         </Routes>
       </main>
     </div>

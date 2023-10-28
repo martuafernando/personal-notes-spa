@@ -5,7 +5,7 @@ import { register } from '../utils/network-data'
 import { LanguageContext } from '../contexts/LanguageContext'
 import * as textContent from '../asset/textContent.json'
 
-function RegisterPage() {
+function RegisterPage () {
   const [name, onNameChangeHandler] = useInput('')
   const [email, onEmailChangeHandler] = useInput('')
   const [password, onPasswordChangeHandler] = useInput('')
@@ -13,10 +13,9 @@ function RegisterPage() {
   const navigate = useNavigate()
   const { language } = useContext(LanguageContext)
 
-  async function onsubmitHandler(e) {
+  async function onsubmitHandler (e) {
     e.preventDefault()
-    if (password !== confirmPassword)
-      return alert('Password dan Konfirmasi Password tidak sama')
+    if (password !== confirmPassword) { return alert('Password dan Konfirmasi Password tidak sama') }
 
     const { error } = await register({ name, email, password })
     if (!error) {

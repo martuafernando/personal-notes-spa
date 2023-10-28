@@ -17,7 +17,15 @@ function putLanguage(language) {
 }
 
 function getLanguage() {
-  return localStorage.getItem('language')
+  return localStorage.getItem('language') || 'id'
+}
+
+function putTheme(theme) {
+  return localStorage.setItem('theme', theme)
+}
+
+function getTheme() {
+  return localStorage.getItem('theme') || 'dark'
 }
 
 async function fetchWithToken(url, options = {}) {
@@ -192,5 +200,7 @@ export {
   unarchiveNote,
   deleteNote,
   getLanguage,
-  putLanguage
+  putLanguage,
+  getTheme,
+  putTheme
 }

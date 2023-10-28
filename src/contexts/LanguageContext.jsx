@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react'
-import { getLanguage, putLanguage } from '../utils/network-data';
+import { getLanguage, putLanguage } from '../utils/network-data'
+import PropTypes from 'prop-types'
 
 export const LanguageContext = React.createContext('id')
 
-export function LanguageProvider({ children }) {
+export function LanguageProvider ({ children }) {
   const [language, setLanguage] = React.useState(getLanguage)
 
-  function onLanguageToggled() {
+  function onLanguageToggled () {
     setLanguage((prevLanguage) => {
       const currentLanguage = prevLanguage === 'id' ? 'en' : 'id'
       putLanguage(currentLanguage)
@@ -20,5 +21,9 @@ export function LanguageProvider({ children }) {
     }) }>
       {children}
     </LanguageContext.Provider>
-  );
+  )
+}
+
+LanguageProvider.propTypes = {
+  children: PropTypes.any
 }

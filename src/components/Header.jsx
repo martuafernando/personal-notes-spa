@@ -9,8 +9,8 @@ import LogoutButton from './button/LogoutButton'
 export default function Header ({ title, userName }) {
   const isAuthenticated = isUserLogged()
   const navigate = useNavigate()
-  
-  function onUserLogout() {
+
+  function onUserLogout () {
     logout()
     navigate(0)
   }
@@ -29,7 +29,7 @@ export default function Header ({ title, userName }) {
           <LogoutButton onLogout={onUserLogout} />
           <p>{userName}</p>
         </>
-        
+
       ) }
     </header>
   )

@@ -6,9 +6,9 @@ import useInput from '../hooks/useInput'
 import * as textContent from '../asset/textContent.json'
 import { LanguageContext } from '../contexts/LanguageContext'
 
-export default function ArchivePage() {
+export default function ArchivePage () {
   const [keyword, onKeywordChangedHandler] = useInput('')
-  const [ notes, setNotes ] = useState()
+  const [notes, setNotes] = useState()
   const { language } = useContext(LanguageContext)
 
   useEffect(() => {
@@ -29,9 +29,9 @@ export default function ArchivePage() {
         notes={
           notes && (
             notes
-            .filter((it) => it.title
-              .toLowerCase()
-              .includes(keyword.toLowerCase()))
+              .filter((it) => it.title
+                .toLowerCase()
+                .includes(keyword.toLowerCase()))
           )
         }
       />

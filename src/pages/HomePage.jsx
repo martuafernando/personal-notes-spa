@@ -8,9 +8,9 @@ import * as textContent from '../asset/textContent.json'
 import useInput from '../hooks/useInput'
 import { LanguageContext } from '../contexts/LanguageContext'
 
-export default function HomePage() {
-  const [ notes, setNotes ] = useState()
-  const [ keyword, onKeywordChangedHandler ] = useInput('')
+export default function HomePage () {
+  const [notes, setNotes] = useState()
+  const [keyword, onKeywordChangedHandler] = useInput('')
   const { language } = useContext(LanguageContext)
 
   useEffect(() => {
@@ -31,9 +31,9 @@ export default function HomePage() {
         notes={
           notes && (
             notes
-            .filter((it) => it.title
-              .toLowerCase()
-              .includes(keyword.toLowerCase()))
+              .filter((it) => it.title
+                .toLowerCase()
+                .includes(keyword.toLowerCase()))
           )
         }
       />

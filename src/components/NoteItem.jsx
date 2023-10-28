@@ -11,13 +11,13 @@ export default function NoteItem ({
 }) {
   return (
     <div className="note-item">
-        <h4 className={ "note-item__title " + (title === undefined ? "skeleton-text" : '') }>
+        <h4 className={ 'note-item__title ' + (title === undefined ? 'skeleton-text' : '') }>
           <Link to={`/notes/${id}`}>{title}</Link>
         </h4>
-        <p className={"note-item__createdAt " + (createdAt === undefined ? "skeleton-text" : '') }>
+        <p className={'note-item__createdAt ' + (createdAt === undefined ? 'skeleton-text' : '') }>
           { createdAt && showFormattedDate(createdAt) }
         </p>
-        <div className={ "note-item__body " + (body === undefined ? "skeleton-text" : '')}>
+        <div className={ 'note-item__body ' + (body === undefined ? 'skeleton-text' : '')}>
           {body && parser(body)}
         </div>
     </div>

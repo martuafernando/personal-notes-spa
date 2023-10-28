@@ -8,7 +8,7 @@ import UnarchiveNoteButton from '../components/button/UnarchiveNoteButton'
 
 import parser from 'html-react-parser'
 
-export default function DetailPage() {
+export default function DetailPage () {
   const params = useParams()
   const navigate = useNavigate()
   const [note, setNote] = useState()
@@ -38,9 +38,9 @@ export default function DetailPage() {
   return (
     <>
       <div className="detail-page">
-        <h2 className={"detail-page__title " + (note?.title === undefined ? "skeleton-text" : '')}>{note?.title}</h2>
-        <p className={"detail-page__createdAt " + (note?.createdAt === undefined ? "skeleton-text" : '')} >{ note?.createdAt && showFormattedDate(note?.createdAt) }</p>
-        <div className={"detail-page__body " + (note?.body === undefined ? "skeleton-text" : '')}>{ note?.body && parser(note?.body) }</div>
+        <h2 className={'detail-page__title ' + (note?.title === undefined ? 'skeleton-text' : '')}>{note?.title}</h2>
+        <p className={'detail-page__createdAt ' + (note?.createdAt === undefined ? 'skeleton-text' : '')} >{ note?.createdAt && showFormattedDate(note?.createdAt) }</p>
+        <div className={'detail-page__body ' + (note?.body === undefined ? 'skeleton-text' : '')}>{ note?.body && parser(note?.body) }</div>
       </div>
       <div className="homepage__action">
         {note?.archived

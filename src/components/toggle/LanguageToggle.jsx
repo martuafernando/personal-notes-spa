@@ -1,8 +1,8 @@
-import { FaLanguage } from 'react-icons/fa';
-import { useContext } from 'react';
-import { LanguageContext } from '../../contexts/LanguageContext';
+import { FaLanguage } from 'react-icons/fa'
+import React, { useContext } from 'react'
+import { LanguageContext } from '../../contexts/LanguageContext'
 
-function LanguageToggle() {
+function LanguageToggle () {
   const { onLanguageToggled } = useContext(LanguageContext)
   return (
     <button
